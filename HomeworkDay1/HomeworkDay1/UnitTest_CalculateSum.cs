@@ -62,5 +62,36 @@ namespace HomeworkDay1
             expected.ToExpectedObject().ShouldEqual(actual);
 
         }
+
+        [TestMethod]
+
+        public void 指定126為一組_CostSum()
+        {
+            var target = new CalculateSum();
+
+            var expected = 9;
+
+            var ids = new List<int> { 1, 2, 6 };
+
+            var actual = target.GetCostSumByIdGroup(ids);
+
+            Assert.AreEqual(expected, actual);
+
+        }
+
+        [TestMethod]
+        public void 指定347為一組_RevenueSum()
+        {
+            var target = new CalculateSum();
+
+            var expected = 44;
+
+            var ids = new List<int> { 3, 4, 7 };
+
+            var actual = target.GetRevenueSumByIdGroup(ids);
+
+            Assert.AreEqual(expected, actual);
+
+        }
     }
 }

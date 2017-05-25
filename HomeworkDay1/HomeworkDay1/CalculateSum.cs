@@ -99,5 +99,25 @@ namespace HomeworkDay1
             return result;
 
         }
+
+        public int GetCostSumByIdGroup(List<int> ids)
+        {
+            var result = new List<int>();
+
+            var products = GetProducts()
+                .Where(r => ids.Contains(r.ID));
+
+            return products.Sum(r => r.Cost);
+        }
+
+        public int GetRevenueSumByIdGroup(List<int> ids)
+        {
+            var result = new List<int>();
+
+            var products = GetProducts()
+                .Where(r => ids.Contains(r.ID));
+
+            return products.Sum(r => r.Revenue);
+        }
     }
 }
