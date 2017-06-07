@@ -58,6 +58,12 @@ namespace HomeworkDay2
 
             Assert.AreEqual(excepted, actual);
         }
+
+        [TestMethod]
+        public void 一二三集各買了一本_價格應該270()
+        {
+            Assert.Fail();
+        }
     }
     #region Production Code
 
