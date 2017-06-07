@@ -8,7 +8,7 @@ namespace HomeworkDay2
     public class BuyHarryPotterBookUnitTest
     {
         [TestMethod]
-        public void 第一集買了一本其它都沒買價格應為100()
+        public void 第一集買了一本_其它都沒買_價格應為100()
         {
             var discountSetting = new Dictionary<int, decimal>
             {
@@ -31,7 +31,34 @@ namespace HomeworkDay2
 
             Assert.AreEqual(excepted, actual);
         }
+
+        [TestMethod]
+        public void 第一集買了一本_第二集也買了一本_價格應為190()
+        {
+            var discountSetting = new Dictionary<int, decimal>
+            {
+                {1, 1m},
+                {2, 0.95m},
+                {3, 0.9m},
+                {4, 0.8m},
+                {5, 0.75m}
+            };
+
+            var store = new Store(discountSetting);
+
+            var books = new List<Book>{
+                new Book { Episode = 1, Quantity = 1, Amount = 100 },
+                new Book { Episode = 2, Quantity = 1, Amount = 100 }
+            };
+
+            var actual = store.Buy(books);
+
+            var excepted = 190m;
+
+            Assert.AreEqual(excepted, actual);
+        }
     }
+    #region Production Code
 
     internal class Store
     {
@@ -49,6 +76,8 @@ namespace HomeworkDay2
             return totalAmount;
         }
     }
+
+    #endregion
 
     #region DTO
 
