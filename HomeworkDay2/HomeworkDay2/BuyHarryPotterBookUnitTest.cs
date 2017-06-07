@@ -62,7 +62,17 @@ namespace HomeworkDay2
         [TestMethod]
         public void 一二三集各買了一本_價格應該270()
         {
-            Assert.Fail();
+            var books = new List<Book>{
+                new Book { Episode = 1, Quantity = 1, Amount = 100 },
+                new Book { Episode = 2, Quantity = 1, Amount = 100 },
+                new Book { Episode = 3, Quantity = 1, Amount = 100 }
+            };
+
+            var actual = _store.Buy(books);
+
+            var excepted = 270m;
+
+            Assert.AreEqual(excepted, actual);
         }
     }
     #region Production Code
