@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace HomeworkDay2
 {
@@ -9,13 +10,24 @@ namespace HomeworkDay2
         [TestMethod]
         public void 第一集買了一本其它都沒買價格應為100()
         {
-            var store = new Store();
+            var discountSetting = new Dictionary<int, decimal>
+            {
+                {1, 1m},
+                {2, 0.95m},
+                {3, 0.9m},
+                {4, 0.8m},
+                {5, 0.75m}
+            };
 
-            var book = new Book { Episode = 1, Quantity = 1 };
+            var store = new Store(discountSetting);
 
-            var actual = store.Buy(book);
+            var books = new List<Book>{
+                new Book { Episode = 1, Quantity = 1, Amount = 100 }
+            };
 
-            var excepted = 100;
+            var actual = store.Buy(books);
+
+            var excepted = 100m;
 
             Assert.AreEqual(excepted, actual);
         }
@@ -23,13 +35,18 @@ namespace HomeworkDay2
 
     internal class Store
     {
-        public Store()
+        private Dictionary<int, decimal> _discountSetting;
+        public Store(Dictionary<int, decimal> discountSetting)
         {
+            this._discountSetting = discountSetting;
         }
 
-        internal int Buy(Book book)
+        internal decimal Buy(List<Book> books)
         {
-            throw new NotImplementedException();
+            var totalAmount = books
+                .Sum(r => r.Quantity * r.Amount) * this._discountSetting[books.Count];
+
+            return totalAmount;
         }
     }
 
@@ -39,6 +56,7 @@ namespace HomeworkDay2
     {
         public int Episode { get; set; }
         public int Quantity { get; set; }
+        public decimal Amount { get; set; }
     }
 
     #endregion
