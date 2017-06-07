@@ -138,8 +138,27 @@ namespace HomeworkDay2
 
         internal decimal Buy(List<Book> books)
         {
-            var totalAmount = books
-                .Sum(r => r.Quantity * r.Amount) * this._discountSetting[books.Count];
+            int index = 0;
+            var totalAmount = default(decimal);
+
+            do
+            {
+                int discount = 0;
+                decimal amount = 0;
+
+                foreach (var book in books)
+                {
+                    if (book.Quantity > index)
+                    {
+                        discount += 1;
+                        amount += book.Amount;
+                    }
+
+                }
+
+                totalAmount += amount * _discountSetting[discount];
+                index++;
+            } while (books.Max(r => r.Quantity) > index);
 
             return totalAmount;
         }
